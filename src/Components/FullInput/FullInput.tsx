@@ -1,4 +1,5 @@
 import React, {DetailedHTMLProps, InputHTMLAttributes} from 'react';
+import styles from './FullInput.module.css'
 
 type DefaultPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
@@ -7,6 +8,7 @@ type PropsType = DefaultPropsType & {
   onKeyPress?: (e: React.KeyboardEvent<HTMLInputElement>) => void
   onEnter?: () => void
   type?: 'number' | 'phone' | 'email' | 'password'
+  style?: string
 }
 
 const FullInput: React.FC<PropsType> = ({
@@ -15,6 +17,7 @@ const FullInput: React.FC<PropsType> = ({
                                           onKeyPress,
                                           onEnter,
                                           type,
+                                          style,
 
                                           ...restProps
                                         }) => {
@@ -27,10 +30,13 @@ const FullInput: React.FC<PropsType> = ({
     onEnter && e.key === 'Enter' && onEnter()
   }
 
+  const fullStyle = `${styles.default} ${style && style}`
+
   return (
     <label>
       <legend>{children}</legend>
       <input
+        className={fullStyle}
         type={type ? type : 'text'}
         onChange={onChangeCallback}
         onKeyPress={onKeyPressCallBack}

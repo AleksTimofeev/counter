@@ -5,7 +5,7 @@ import ContainerCounter from "./Components/Counter/ContainerCounter";
 function App() {
   return (
     <div className="App">
-      <ContainerCounter />
+      <ContainerCounter/>
     </div>
   );
 }

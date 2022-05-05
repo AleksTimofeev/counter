@@ -1,32 +1,22 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import styles from './Counter.module.css'
 import Display from "./Display/Display";
 import FullButton from "../FullButton/FullButton";
-import {CounterValueType} from "./ContainerCounter";
+import {useDispatch, useSelector} from "react-redux";
+import {counterSelector} from "../../store/store";
+import {incrementCounter, resetCounter} from "../../store/counterReducer";
 
 
-export type CounterType = number
-export type MaxCounterValueType = number
-export type StartAnimeType = boolean
-
-type PropsType = {
-  counterValue: CounterValueType
-  counterInc: () => void
-  counterReset: () => void
-  start: boolean
-  error: boolean
-}
-
-const Counter: React.FC<PropsType> = ({
-                                        counterValue: {currentValue, maxValue, startValue},
-                                        counterInc, counterReset, start, error
-                                      }) => {
+const Counter = () => {
+  const dispatch = useDispatch()
+  const {error, start, counterValue} = useSelector(counterSelector)
+  const {startValue, maxValue, currentValue} = counterValue
 
   const resetHandler = () => {
-    counterReset()
+    dispatch(resetCounter())
   }
   const incHandler = () => {
-    counterInc()
+    dispatch(incrementCounter())
   }
 
 
